@@ -2,82 +2,89 @@
 <html lang="en"><head><meta charset="utf-8"><title>RecallIQ</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
-:root{--ink:#0a0e1a;--deck:#111829;--deck2:#0d1322;--line:#212b45;--text:#e8ecf6;--mute:#8791ab;--sand:#eadfc4;--sandtx:#2a2316;--teal:#3fd6bd;--serif:"Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;--sans:"Segoe UI",system-ui,sans-serif}
+:root{--ink:#070a14;--line:rgba(255,255,255,.09);--text:#eef1fa;--mute:#98a2bf;--sand:#f0e4c6;--sandtx:#2a2316;--teal:#5ff0d6;--vio:#7c6cff;--serif:"Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;--sans:"Segoe UI",system-ui,sans-serif}
 *{box-sizing:border-box}
 html,body{height:100%}
-body{margin:0;background:var(--ink);color:var(--text);font:14px/1.55 var(--sans);display:grid;grid-template-columns:262px minmax(0,1fr) 420px;overflow:hidden}
+body{margin:0;color:var(--text);font:14px/1.55 var(--sans);display:grid;grid-template-columns:262px minmax(0,1fr) 420px;overflow:hidden;
+background:radial-gradient(700px 420px at 12% -6%,rgba(124,108,255,.24),transparent 65%),radial-gradient(760px 500px at 92% 106%,rgba(95,240,214,.17),transparent 60%),var(--ink)}
 .rail,main,.file{padding:24px;overflow-y:auto;min-width:0}
-.rail{background:var(--deck2);border-right:1px solid var(--line)}
-.file{background:var(--deck);border-left:1px solid var(--line)}
-::-webkit-scrollbar{width:6px}::-webkit-scrollbar-thumb{background:#26314f;border-radius:9px}
+.rail,.file{background:rgba(10,14,28,.62);backdrop-filter:blur(18px)}
+.rail{border-right:1px solid var(--line)}.file{border-left:1px solid var(--line)}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-thumb{background:#2a3558;border-radius:9px}
 h1,h2{font-family:var(--serif);font-weight:700;margin:0}
 h3{font-size:12px;font-weight:600;color:var(--mute);margin:22px 0 8px}
-button{font:600 13px var(--sans);cursor:pointer;border:0;border-radius:8px;padding:10px 14px;color:#06231d;background:var(--teal)}
-button:hover{filter:brightness(1.1)}button:disabled{opacity:.5;cursor:wait}
+button{font:700 13px var(--sans);cursor:pointer;border:0;border-radius:10px;padding:10px 16px;color:#052a24;background:linear-gradient(135deg,#a4fbe9,#5ff0d6 55%,#3cc8ee);box-shadow:0 8px 22px rgba(95,240,214,.28),inset 0 1px 0 rgba(255,255,255,.55)}
+button:hover{filter:brightness(1.08)}button:disabled{opacity:.5;cursor:wait}
 :focus-visible{outline:2px solid var(--teal);outline-offset:2px}
-input{width:100%;padding:10px 12px;background:var(--ink);border:1px solid var(--line);border-radius:8px;color:var(--text);font:14px var(--sans)}
+input{width:100%;padding:11px 13px;background:rgba(7,10,20,.7);border:1px solid var(--line);border-radius:10px;color:var(--text);font:14px var(--sans);box-shadow:inset 0 2px 6px rgba(0,0,0,.35)}
 input:focus{border-color:var(--teal);outline:none}
-.logo{font:700 27px var(--serif)}.tag{color:var(--mute);font-size:12px;margin:2px 0 6px}
-.cl{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:10px;cursor:pointer;border:1px solid transparent}
-.cl:hover{background:#151d33}.cl.on{background:#18223d;border-color:#2c3a63}
-.av{width:34px;height:34px;flex:none;border-radius:50%;background:var(--sand);color:var(--sandtx);display:grid;place-items:center;font:700 16px var(--serif);text-transform:uppercase}
+.g,.prof,.a,.strip div,.bar,.map,.ins{background:linear-gradient(150deg,rgba(255,255,255,.075),rgba(255,255,255,.02));border:1px solid var(--line);box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 18px 36px rgba(0,0,0,.34);backdrop-filter:blur(16px)}
+.logo{font:700 28px var(--serif)}.tag{color:var(--mute);font-size:12px;margin:2px 0 6px}
+.cl{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:12px;cursor:pointer;border:1px solid transparent}
+.cl:hover{background:rgba(255,255,255,.05)}.cl.on{background:linear-gradient(150deg,rgba(124,108,255,.25),rgba(95,240,214,.10));border-color:rgba(95,240,214,.4)}
+.av{width:34px;height:34px;flex:none;border-radius:50%;background:linear-gradient(145deg,#fff3d6,#e6d6ae);color:var(--sandtx);display:grid;place-items:center;font:700 16px var(--serif);text-transform:uppercase;box-shadow:0 4px 12px rgba(0,0,0,.35),inset 0 1px 0 #fff}
 .cl b{text-transform:capitalize;font-weight:600}.cl small{display:block;color:var(--mute);font-size:12px}
-.step{display:flex;gap:10px;align-items:center;width:100%;text-align:left;margin-bottom:6px;background:#151d33;color:var(--text);border:1px solid var(--line);font-weight:500}
-.step i{font:700 12px var(--serif);font-style:normal;width:22px;height:22px;border-radius:50%;border:1px solid #3a4a78;display:grid;place-items:center;flex:none}
-.step.done i{background:var(--teal);border-color:var(--teal);color:#06231d}
+.step{display:flex;gap:10px;align-items:center;width:100%;text-align:left;margin-bottom:6px;color:var(--text);font-weight:500;background:linear-gradient(150deg,rgba(255,255,255,.08),rgba(255,255,255,.02));border:1px solid var(--line);box-shadow:none}
+.step i{font:700 12px var(--serif);font-style:normal;width:22px;height:22px;border-radius:50%;border:1px solid rgba(255,255,255,.25);display:grid;place-items:center;flex:none}
+.step.done i{background:var(--teal);border-color:var(--teal);color:#052a24;box-shadow:0 0 12px rgba(95,240,214,.6)}
 .hint{color:var(--mute);font-size:12px}
-.pill{display:inline-block;padding:5px 12px;border-radius:99px;background:#151d33;color:var(--mute);font-size:12px}
-.pill.live{background:#0e3a34;color:var(--teal)}
+.pill{display:inline-block;padding:5px 12px;border-radius:99px;background:rgba(255,255,255,.06);color:var(--mute);font-size:12px}
+.pill.live{background:rgba(95,240,214,.14);color:var(--teal);box-shadow:0 0 14px rgba(95,240,214,.25)}
 .top{display:flex;justify-content:flex-end;color:var(--mute);font-size:12px;margin-bottom:6px}
 .top b{color:var(--text);font:700 14px var(--serif);margin-left:6px}
-main h1{font-size:30px;line-height:1.2;max-width:640px}
-main .lead{color:var(--mute);max-width:640px;margin:8px 0 0}
-.strip{display:flex;gap:28px;flex-wrap:wrap;margin:18px 0 0;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.strip div{font-size:12px;color:var(--mute)}.strip b{display:block;font:700 22px var(--serif);color:var(--text)}
-.loop{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:18px 0 8px}
-.st{padding:9px 6px;text-align:center;font-size:12px;font-weight:600;color:#5d688a;border-bottom:3px solid var(--line);transition:.3s}
-.st.on{color:var(--text);border-color:var(--teal)}
+main h1{font-size:31px;line-height:1.2;max-width:660px}
+main .lead{color:var(--mute);max-width:660px;margin:8px 0 0}
+.ins{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:16px;margin-top:16px;border-color:rgba(95,240,214,.38);background:linear-gradient(120deg,rgba(95,240,214,.15),rgba(124,108,255,.14))}
+.ins .ic{flex:none;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:16px;color:#052a24;background:linear-gradient(135deg,#a4fbe9,#5ff0d6);box-shadow:0 0 18px rgba(95,240,214,.5)}
+.ins b{display:block;font-size:12px;color:var(--teal);margin-bottom:2px}
+.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+.strip div{padding:14px 16px;border-radius:14px;font-size:12px;color:var(--mute)}
+.strip b{display:block;font:700 24px var(--serif);color:var(--text)}
+.loop{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:18px 0 8px}
+.st{padding:9px 6px;text-align:center;font-size:12px;font-weight:600;color:#6d789c;border-radius:99px;background:rgba(255,255,255,.04);border:1px solid var(--line);transition:.3s}
+.st.on{color:#fff;background:linear-gradient(135deg,rgba(95,240,214,.3),rgba(124,108,255,.3));border-color:rgba(95,240,214,.65);box-shadow:0 0 22px rgba(95,240,214,.35)}
 .cap{color:var(--mute);font-size:13px;min-height:20px;margin-bottom:16px}
-.prof{display:grid;grid-template-columns:auto 1fr;gap:16px;background:var(--deck);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px}
+.prof{display:grid;grid-template-columns:auto 1fr;gap:16px;border-radius:16px;padding:18px;margin-bottom:14px}
 .prof .av{width:56px;height:56px;font-size:24px}
 .prof h2{font-size:22px;text-transform:capitalize;display:flex;gap:10px;align-items:center}
-.chip{font:600 12px var(--sans);background:#1d2947;color:#b9c6ee;padding:2px 10px;border-radius:99px}
+.chip{font:600 12px var(--sans);background:rgba(124,108,255,.25);color:#d5d0ff;padding:2px 10px;border-radius:99px}
 .meta{display:flex;gap:16px;flex-wrap:wrap;color:var(--mute);font-size:12px;margin:4px 0 12px}
 .hi{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
 .hi li{border-left:2px solid var(--teal);padding-left:10px}
 .hi b{display:block;font-size:13px}.hi small{display:block;color:var(--mute);font-size:12px}
 .row{display:flex;gap:10px}.row input{flex:1}
-.you{margin:16px 0 0 auto;width:fit-content;max-width:75%;background:#1b2745;border-radius:14px 14px 3px 14px;padding:10px 14px}
+.you{margin:16px 0 0 auto;width:fit-content;max-width:75%;background:linear-gradient(135deg,rgba(124,108,255,.4),rgba(124,108,255,.2));border:1px solid rgba(124,108,255,.5);border-radius:16px 16px 4px 16px;padding:10px 14px}
 .tk{color:var(--mute);font-size:12px;margin:14px 0 6px}
 .ans{display:grid;grid-template-columns:1fr 1.25fr;gap:14px}
-.a{border-radius:12px;padding:16px;white-space:pre-wrap;background:var(--deck);border:1px solid var(--line)}
+.a{border-radius:16px;padding:16px;white-space:pre-wrap}
 .a h4{margin:0 0 8px;font:600 12px var(--sans);color:var(--mute)}
-.a.mem{border-color:var(--teal);font-size:15px}.a.mem h4{color:var(--teal)}
+.a.mem{border-color:rgba(95,240,214,.6);font-size:15px;box-shadow:0 0 42px rgba(95,240,214,.18),inset 0 1px 0 rgba(255,255,255,.1),0 18px 36px rgba(0,0,0,.34)}.a.mem h4{color:var(--teal)}
 .q,.used{white-space:normal;margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:12px;color:var(--mute)}
-.ch{display:inline-block;margin:4px 6px 0 0;padding:2px 9px;border-radius:99px;background:#1d2947;color:#b9c6ee;font-size:11px}
-.bar{margin-top:14px;padding:14px;border-radius:12px;background:#18223d;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.ch{display:inline-block;margin:4px 6px 0 0;padding:2px 9px;border-radius:99px;background:rgba(124,108,255,.22);color:#d5d0ff;font-size:11px}
+.bar{margin-top:14px;padding:14px;border-radius:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .bar span{flex:1;min-width:180px;font-weight:600}
-.no{background:#4a2620;color:#ffb3a3}
-.ok{background:#0e3a34;color:var(--teal);font-weight:600;padding:12px 14px;border-radius:12px;margin-top:14px}
-.warn{background:#3d2620;color:#ffbfae;padding:12px 14px;border-radius:12px;margin-top:14px;font-size:13px}
+.no{color:#ffd0c4;background:linear-gradient(135deg,#8a3a2c,#5e2519);box-shadow:0 8px 20px rgba(138,58,44,.3),inset 0 1px 0 rgba(255,255,255,.2)}
+.ok{background:linear-gradient(120deg,rgba(95,240,214,.2),rgba(95,240,214,.08));border:1px solid rgba(95,240,214,.45);color:var(--teal);font-weight:600;padding:12px 14px;border-radius:14px;margin-top:14px}
+.warn{background:rgba(255,138,120,.12);border:1px solid rgba(255,138,120,.35);color:#ffc9b8;padding:12px 14px;border-radius:14px;margin-top:14px;font-size:13px}
 .trust{margin-top:22px;color:var(--mute);font-size:12px}
 .file h2{font-size:23px}.file .sub{color:var(--mute);margin:2px 0 14px;font-size:13px}
-.map{width:100%;background:var(--ink);border:1px solid var(--line);border-radius:14px}
-.ln{stroke:#3a4a78;stroke-width:1.2;stroke-dasharray:200;stroke-dashoffset:200;animation:dr .8s forwards}
+.map{width:100%;border-radius:16px;background:radial-gradient(circle at 50% 50%,rgba(124,108,255,.22),rgba(7,10,20,.85) 70%)}
+.ln{stroke:rgba(150,170,255,.5);stroke-width:1.2;stroke-dasharray:200;stroke-dashoffset:200;animation:dr .8s forwards}
 @keyframes dr{to{stroke-dashoffset:0}}
-.nd{fill:var(--sand)}.nd.n{fill:var(--teal)}
-.card{position:relative;background:var(--sand);color:var(--sandtx);border-radius:4px;padding:26px 16px 14px;margin:18px 0 0;font:15px/1.5 var(--serif);box-shadow:0 8px 18px rgba(0,0,0,.35);animation:drop .45s both}
+.nd{fill:var(--sand);filter:drop-shadow(0 0 5px rgba(240,228,198,.8))}.nd.n{fill:var(--teal);filter:drop-shadow(0 0 7px rgba(95,240,214,.9))}
+.card{position:relative;background:linear-gradient(160deg,#fbf2d9,#f0e4c6 55%,#ddd0ae);color:var(--sandtx);border-radius:6px;padding:26px 16px 14px;margin:18px 0 0;font:15px/1.5 var(--serif);box-shadow:0 14px 28px rgba(0,0,0,.45),inset 0 1px 0 #fff;animation:drop .45s both}
 .card:nth-child(even){transform:rotate(.5deg)}.card:nth-child(odd){transform:rotate(-.4deg)}
-.card .tab{position:absolute;top:0;left:14px;transform:translateY(-50%);background:#2a2316;color:var(--sand);font:600 11px var(--sans);padding:3px 10px;border-radius:99px}
-.card.v{background:#d6f5ec;color:#0c2d27}.card.v .tab{background:var(--teal);color:#06231d}
+.card .tab{position:absolute;top:0;left:14px;transform:translateY(-50%);background:linear-gradient(135deg,#3a3120,#1f1a10);color:var(--sand);font:600 11px var(--sans);padding:3px 10px;border-radius:99px}
+.card.v{background:linear-gradient(160deg,#eafff8,#d6f5ec 55%,#bde9dd);color:#0c2d27;box-shadow:0 14px 28px rgba(0,0,0,.45),0 0 26px rgba(95,240,214,.3),inset 0 1px 0 #fff}
+.card.v .tab{background:linear-gradient(135deg,#a4fbe9,#5ff0d6);color:#052a24}
 @keyframes drop{from{opacity:0;translate:0 -14px}}
 .empty{color:var(--mute);font-size:13px;margin-top:14px}
 .tlog{list-style:none;margin:0;padding:0}
 .tlog li{padding:6px 0 6px 12px;border-left:2px solid var(--line);color:var(--mute);font-size:12px}.tlog b{color:var(--text);font-weight:600}
-.toast{position:fixed;left:50%;bottom:22px;translate:-50% 0;background:var(--teal);color:#06231d;padding:10px 16px;border-radius:99px;font-weight:600;opacity:0;pointer-events:none;transition:.3s;z-index:9}
+.toast{position:fixed;left:50%;bottom:22px;translate:-50% 0;background:linear-gradient(135deg,#a4fbe9,#5ff0d6);color:#052a24;padding:10px 18px;border-radius:99px;font-weight:700;opacity:0;pointer-events:none;transition:.3s;z-index:9;box-shadow:0 10px 30px rgba(95,240,214,.4)}
 .toast.on{opacity:1}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.ln{stroke-dashoffset:0}}
-@media(max-width:1100px){body{display:block;overflow:auto;height:auto}.rail,.file{border:0}.ans{grid-template-columns:1fr}}
+@media(max-width:1100px){body{display:block;overflow:auto;height:auto}.rail,.file{border:0}.ans{grid-template-columns:1fr}.strip{grid-template-columns:repeat(2,1fr)}}
 </style></head><body>
 <aside class="rail">
  <div class="logo">RecallIQ</div>
@@ -97,6 +104,7 @@ main .lead{color:var(--mute);max-width:640px;margin:8px 0 0}
  <div class="top">Session time<b id="clk">00:00</b></div>
  <h1>Support that remembers what fixed it last time</h1>
  <p class="lead">Before it answers, RecallIQ recalls the customer's history from Hindsight. It learns only from fixes the customer confirms.</p>
+ <div class="ins"><div class="ic">&#10022;</div><div><b>Live insight from Hindsight</b><span id="ins"></span></div></div>
  <div class="strip">
   <div><b id="n1">0</b>Memories recalled</div><div><b id="n2">0</b>Fixes verified</div>
   <div><b id="n3">0</b>Learned memories used</div><div><b id="n4">-</b>Average answer time</div>
@@ -138,6 +146,7 @@ vikram:{plan:'Pro',since:'Nov 2024',csat:'4.4',ask:'my dashboard is very slow',a
 ['Slow dashboard','Oversized cached filter set','Saved filters reset'],
 ['Failed webhook deliveries','Endpoint timeout too short','Timeout raised on the endpoint']]}};
 const CAP=[`Pick a customer, save their past tickets, then ask a question.`,`Recall: searching Hindsight for this customer's past issues.`,`Understand: history found, building context for the answer.`,`Resolve: a personalised answer is ready. Compare it with the answer that has no memory.`,`Verify: waiting for the customer to confirm the fix.`,`Remember: the confirmed fix is now stored in Hindsight.`];
+const INS0=`Ask a question and RecallIQ will show what it already knows about this customer.`;
 let S={mems:[],msg:'',reply:''},c1=0,c2=0,c3=0,ts=[],logOn=false,T0=Date.now();
 const cn=()=>$('cust').value.trim().toLowerCase();
 const P=()=>C[cn()]||{plan:'New',since:'today',csat:'-',ask:'I need help with my account',again:'I have the same problem again',h:[]};
@@ -158,14 +167,14 @@ function draw(ms,extra){
  it.forEach((m,i)=>{const a=-Math.PI/2+i*2*Math.PI/it.length,x=cx+132*Math.cos(a),y=cy+80*Math.sin(a);
   l+=`<line class="ln" x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" style="animation-delay:${i*.1}s"/>`;
   d+=`<circle class="nd${m.n?' n':''}" cx="${x}" cy="${y}" r="8"><title>${esc(m.t)}</title></circle>`});
- $('map').innerHTML=l+d+`<circle cx="${cx}" cy="${cy}" r="22" fill="#eadfc4"/><text x="${cx}" y="${cy+7}" text-anchor="middle" font-size="20" font-weight="700" font-family="Georgia,serif" fill="#2a2316">${(cn()||'?')[0].toUpperCase()}</text>`}
+ $('map').innerHTML=l+d+`<circle cx="${cx}" cy="${cy}" r="22" fill="#f0e4c6"/><text x="${cx}" y="${cy+7}" text-anchor="middle" font-size="20" font-weight="700" font-family="Georgia,serif" fill="#2a2316">${(cn()||'?')[0].toUpperCase()}</text>`}
 function who(){const n=cn()||'?',p=P();
  $('nm').textContent=n;$('av').textContent=n[0];$('pl').textContent=p.plan;
  $('meta').innerHTML=p.h.length?`<span>Customer since ${p.since}</span><span>Satisfaction ${p.csat} out of 5</span><span>${p.h.length} past tickets</span>`:`<span>New customer with no history yet</span>`;
  $('hi').innerHTML=p.h.map(x=>`<li><b>${esc(x[0])}</b><small>Cause: ${esc(x[1])}</small><small>Fix: ${esc(x[2])}</small></li>`).join('');
  document.querySelectorAll('.cl').forEach(e=>e.classList.toggle('on',e.dataset.n===n));
  [1,2,3].forEach(i=>$('d'+i).classList.remove('done'));
- S.mems=[];$('out').innerHTML='';$('retained').innerHTML='';
+ S.mems=[];$('out').innerHTML='';$('retained').innerHTML='';$('ins').textContent=INS0;
  $('mems').innerHTML='<p class="empty">Nothing recalled yet. Ask a question and the customer\'s file fills in here.</p>';draw([]);step(0)}
 function pick(n){$('cust').value=n;$('msg').value='';who()}
 $('cl').innerHTML=Object.keys(C).map(n=>`<div class="cl" data-n="${n}" onclick="pick('${n}')"><div class="av">${n[0]}</div><div><b>${n}</b><small>${C[n].plan} plan</small></div></div>`).join('');
@@ -182,7 +191,8 @@ async function seed(){const p=P();if(!p.h.length){toast('A new customer has no p
 function ask(k){mark(k);$('msg').value=k===2?P().ask:P().again;send()}
 async function send(){
  const msg=$('msg').value.trim();if(!msg)return;const b=$('sendBtn');b.disabled=true;b.textContent='Recalling';
- $('retained').innerHTML='';$('out').innerHTML=`<div class="you">${esc(msg)}</div><div class="warn" style="background:#18223d;color:var(--text)">Searching Hindsight for this customer's history.</div>`;
+ $('retained').innerHTML='';$('ins').textContent='Searching Hindsight for this customer\'s history.';
+ $('out').innerHTML=`<div class="you">${esc(msg)}</div><div class="warn">Searching Hindsight for this customer's history.</div>`;
  step(1);log(`Customer asked: ${msg}`);const t0=performance.now();
  try{
   const d=await api('/api/chat',{customer:cn(),message:msg});live();
@@ -190,6 +200,8 @@ async function send(){
   S={mems:d.memories,msg:msg,reply:d.reply_memory};
   const ln=d.memories.filter(m=>isNew(m.text)).length;c1+=d.memories.length;c3+=ln;$('n1').textContent=c1;$('n3').textContent=c3;
   $('mems').innerHTML=d.memories.length?cards(d.memories):'<p class="empty">No history found for this customer.</p>';
+  if(d.memories.length){const t=d.memories[0].text;$('ins').textContent=`Found ${d.memories.length} past record${d.memories.length===1?'':'s'} for ${cn()}. A recalled record: "${t.slice(0,150)}${t.length>150?'...':''}"${ln?' This includes a fix learned from a verified resolution.':''}`}
+  else{$('ins').textContent=`No past records found for ${cn()}, so this answer is generic. Pass it to a human agent if it does not help.`}
   draw(d.memories);step(2);log(`Recalled ${d.memories.length} memories`+(ln?`, ${ln} learned from earlier verified fixes`:''));
   step(3);const id=Math.floor(1000+Math.random()*9000);
   const chips=d.memories.slice(0,4).map(m=>`<span class="ch" title="${esc(m.text)}">${esc(m.text.slice(0,44))}...</span>`).join('');

@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>RecallIQ</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+:root{--ink:#0a0e1a;--deck:#111829;--deck2:#0d1322;--line:#212b45;--text:#e8ecf6;--mute:#8791ab;--sand:#eadfc4;--sandtx:#2a2316;--teal:#3fd6bd;--serif:"Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;--sans:"Segoe UI",system-ui,sans-serif}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--ink);color:var(--text);font:14px/1.55 var(--sans);display:grid;grid-template-columns:262px minmax(0,1fr) 420px;overflow:hidden}
+.rail,main,.file{padding:24px;overflow-y:auto;min-width:0}
+.rail{background:var(--deck2);border-right:1px solid var(--line)}
+.file{background:var(--deck);border-left:1px solid var(--line)}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-thumb{background:#26314f;border-radius:9px}
+h1,h2{font-family:var(--serif);font-weight:700;margin:0}
+h3{font-size:12px;font-weight:600;color:var(--mute);margin:22px 0 8px}
+button{font:600 13px var(--sans);cursor:pointer;border:0;border-radius:8px;padding:10px 14px;color:#06231d;background:var(--teal)}
+button:hover{filter:brightness(1.1)}button:disabled{opacity:.5;cursor:wait}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+input{width:100%;padding:10px 12px;background:var(--ink);border:1px solid var(--line);border-radius:8px;color:var(--text);font:14px var(--sans)}
+input:focus{border-color:var(--teal);outline:none}
+.logo{font:700 27px var(--serif)}.tag{color:var(--mute);font-size:12px;margin:2px 0 6px}
+.cl{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:10px;cursor:pointer;border:1px solid transparent}
+.cl:hover{background:#151d33}.cl.on{background:#18223d;border-color:#2c3a63}
+.av{width:34px;height:34px;flex:none;border-radius:50%;background:var(--sand);color:var(--sandtx);display:grid;place-items:center;font:700 16px var(--serif);text-transform:uppercase}
+.cl b{text-transform:capitalize;font-weight:600}.cl small{display:block;color:var(--mute);font-size:12px}
+.step{display:flex;gap:10px;align-items:center;width:100%;text-align:left;margin-bottom:6px;background:#151d33;color:var(--text);border:1px solid var(--line);font-weight:500}
+.step i{font:700 12px var(--serif);font-style:normal;width:22px;height:22px;border-radius:50%;border:1px solid #3a4a78;display:grid;place-items:center;flex:none}
+.step.done i{background:var(--teal);border-color:var(--teal);color:#06231d}
+.hint{color:var(--mute);font-size:12px}
+.pill{display:inline-block;padding:5px 12px;border-radius:99px;background:#151d33;color:var(--mute);font-size:12px}
+.pill.live{background:#0e3a34;color:var(--teal)}
+.top{display:flex;justify-content:flex-end;color:var(--mute);font-size:12px;margin-bottom:6px}
+.top b{color:var(--text);font:700 14px var(--serif);margin-left:6px}
+main h1{font-size:30px;line-height:1.2;max-width:640px}
+main .lead{color:var(--mute);max-width:640px;margin:8px 0 0}
+.strip{display:flex;gap:28px;flex-wrap:wrap;margin:18px 0 0;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.strip div{font-size:12px;color:var(--mute)}.strip b{display:block;font:700 22px var(--serif);color:var(--text)}
+.loop{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:18px 0 8px}
+.st{padding:9px 6px;text-align:center;font-size:12px;font-weight:600;color:#5d688a;border-bottom:3px solid var(--line);transition:.3s}
+.st.on{color:var(--text);border-color:var(--teal)}
+.cap{color:var(--mute);font-size:13px;min-height:20px;margin-bottom:16px}
+.prof{display:grid;grid-template-columns:auto 1fr;gap:16px;background:var(--deck);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:14px}
+.prof .av{width:56px;height:56px;font-size:24px}
+.prof h2{font-size:22px;text-transform:capitalize;display:flex;gap:10px;align-items:center}
+.chip{font:600 12px var(--sans);background:#1d2947;color:#b9c6ee;padding:2px 10px;border-radius:99px}
+.meta{display:flex;gap:16px;flex-wrap:wrap;color:var(--mute);font-size:12px;margin:4px 0 12px}
+.hi{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.hi li{border-left:2px solid var(--teal);padding-left:10px}
+.hi b{display:block;font-size:13px}.hi small{display:block;color:var(--mute);font-size:12px}
+.row{display:flex;gap:10px}.row input{flex:1}
+.you{margin:16px 0 0 auto;width:fit-content;max-width:75%;background:#1b2745;border-radius:14px 14px 3px 14px;padding:10px 14px}
+.tk{color:var(--mute);font-size:12px;margin:14px 0 6px}
+.ans{display:grid;grid-template-columns:1fr 1.25fr;gap:14px}
+.a{border-radius:12px;padding:16px;white-space:pre-wrap;background:var(--deck);border:1px solid var(--line)}
+.a h4{margin:0 0 8px;font:600 12px var(--sans);color:var(--mute)}
+.a.mem{border-color:var(--teal);font-size:15px}.a.mem h4{color:var(--teal)}
+.q,.used{white-space:normal;margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:12px;color:var(--mute)}
+.ch{display:inline-block;margin:4px 6px 0 0;padding:2px 9px;border-radius:99px;background:#1d2947;color:#b9c6ee;font-size:11px}
+.bar{margin-top:14px;padding:14px;border-radius:12px;background:#18223d;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.bar span{flex:1;min-width:180px;font-weight:600}
+.no{background:#4a2620;color:#ffb3a3}
+.ok{background:#0e3a34;color:var(--teal);font-weight:600;padding:12px 14px;border-radius:12px;margin-top:14px}
+.warn{background:#3d2620;color:#ffbfae;padding:12px 14px;border-radius:12px;margin-top:14px;font-size:13px}
+.trust{margin-top:22px;color:var(--mute);font-size:12px}
+.file h2{font-size:23px}.file .sub{color:var(--mute);margin:2px 0 14px;font-size:13px}
+.map{width:100%;background:var(--ink);border:1px solid var(--line);border-radius:14px}
+.ln{stroke:#3a4a78;stroke-width:1.2;stroke-dasharray:200;stroke-dashoffset:200;animation:dr .8s forwards}
+@keyframes dr{to{stroke-dashoffset:0}}
+.nd{fill:var(--sand)}.nd.n{fill:var(--teal)}
+.card{position:relative;background:var(--sand);color:var(--sandtx);border-radius:4px;padding:26px 16px 14px;margin:18px 0 0;font:15px/1.5 var(--serif);box-shadow:0 8px 18px rgba(0,0,0,.35);animation:drop .45s both}
+.card:nth-child(even){transform:rotate(.5deg)}.card:nth-child(odd){transform:rotate(-.4deg)}
+.card .tab{position:absolute;top:0;left:14px;transform:translateY(-50%);background:#2a2316;color:var(--sand);font:600 11px var(--sans);padding:3px 10px;border-radius:99px}
+.card.v{background:#d6f5ec;color:#0c2d27}.card.v .tab{background:var(--teal);color:#06231d}
+@keyframes drop{from{opacity:0;translate:0 -14px}}
+.empty{color:var(--mute);font-size:13px;margin-top:14px}
+.tlog{list-style:none;margin:0;padding:0}
+.tlog li{padding:6px 0 6px 12px;border-left:2px solid var(--line);color:var(--mute);font-size:12px}.tlog b{color:var(--text);font-weight:600}
+.toast{position:fixed;left:50%;bottom:22px;translate:-50% 0;background:var(--teal);color:#06231d;padding:10px 16px;border-radius:99px;font-weight:600;opacity:0;pointer-events:none;transition:.3s;z-index:9}
+.toast.on{opacity:1}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.ln{stroke-dashoffset:0}}
+@media(max-width:1100px){body{display:block;overflow:auto;height:auto}.rail,.file{border:0}.ans{grid-template-columns:1fr}}
+</style></head><body>
+<aside class="rail">
+ <div class="logo">RecallIQ</div>
+ <div class="tag">AI customer support that remembers</div>
+ <h3>Customers</h3><div id="cl"></div>
+ <input id="cust" value="priya" placeholder="Type a new customer name" oninput="who()" style="margin-top:8px">
+ <h3>Guided demo</h3>
+ <button class="step" id="d1" onclick="seed()"><i>1</i>Save the customer's past tickets</button>
+ <button class="step" id="d2" onclick="ask(2)"><i>2</i>Ask about the first issue</button>
+ <button class="step" id="d3" onclick="ask(3)"><i>3</i>Report a related issue again</button>
+ <p class="hint">Do step 1 and wait 15 seconds. Do step 2 and confirm the fix. Wait 20 seconds, then do step 3 to watch it use what it just learned.</p>
+ <button class="step" onclick="newSession()"><i>+</i>Start a clean demo session</button>
+ <h3>Connection</h3><span class="pill" id="hs">Hindsight waiting</span>
+ <p class="hint" style="margin-top:10px">Memory by Hindsight. Answers by Groq.</p>
+</aside>
+<main>
+ <div class="top">Session time<b id="clk">00:00</b></div>
+ <h1>Support that remembers what fixed it last time</h1>
+ <p class="lead">Before it answers, RecallIQ recalls the customer's history from Hindsight. It learns only from fixes the customer confirms.</p>
+ <div class="strip">
+  <div><b id="n1">0</b>Memories recalled</div><div><b id="n2">0</b>Fixes verified</div>
+  <div><b id="n3">0</b>Learned memories used</div><div><b id="n4">-</b>Average answer time</div>
+ </div>
+ <div class="loop"><div class="st" id="s1">Recall</div><div class="st" id="s2">Understand</div><div class="st" id="s3">Resolve</div><div class="st" id="s4">Verify</div><div class="st" id="s5">Remember</div></div>
+ <div class="cap" id="cap"></div>
+ <div class="prof"><div class="av" id="av">P</div><div>
+  <h2><span id="nm">priya</span><span class="chip" id="pl">Business</span></h2>
+  <div class="meta" id="meta"></div><ul class="hi" id="hi"></ul></div></div>
+ <div class="row"><input id="msg" placeholder="Type the customer's message" onkeydown="if(event.key==='Enter')send()"><button id="sendBtn" onclick="send()">Send</button></div>
+ <div id="out"></div>
+ <div class="trust">RecallIQ stores a fix only after the customer confirms it worked.</div>
+</main>
+<section class="file">
+ <h2>Customer file</h2><p class="sub">Pulled live from Hindsight recall</p>
+ <svg id="map" class="map" viewBox="0 0 340 220"></svg>
+ <div id="mems"><p class="empty">Nothing recalled yet. Ask a question and the customer's file fills in here.</p></div>
+ <div id="retained"></div>
+ <h3>What just happened</h3><ul class="tlog" id="tl"><li>No events yet.</li></ul>
+</section>
+<div class="toast" id="toast"></div>
+<script>
+const $=id=>document.getElementById(id);
+const C={
+alex:{plan:'Pro',since:'Mar 2024',csat:'4.6',ask:'my app keeps logging me out',again:'I got logged out again after the latest update',h:[
+['Login failures after password reset','Stale auth token cache','Cleared app local storage and signed in again'],
+['CSV export missing last column','Known export formatter bug','Formatter patch released'],
+['API rate limit request','Monthly batch job needs more throughput on the Pro plan','Rate limit increase approved']]},
+priya:{plan:'Business',since:'Jun 2023',csat:'4.8',ask:'I was charged twice this month',again:'I think I was billed twice again',h:[
+['Duplicate billing charge','Payment retry after a gateway timeout','Duplicate charge refunded'],
+['GST details missing on invoices','Billing profile was incomplete','Profile updated and invoices reissued']]},
+rahul:{plan:'Free',since:'Jan 2025',csat:'4.1',ask:'notifications stopped arriving on my phone',again:'I am not getting any alerts again',h:[
+['Push notifications stopped','Aggressive phone battery optimization','Battery optimization turned off for the app'],
+['Upgrade question','Needed more storage than the Free plan','Pro plan options explained']]},
+sara:{plan:'Enterprise',since:'Aug 2022',csat:'4.9',ask:'our team cannot sign in with SSO',again:'SSO sign-in is failing again for my team',h:[
+['SSO redirect loop','Expired identity provider certificate','Renewed certificate uploaded'],
+['Audit log export','Manual monthly exports','Scheduled exports enabled']]},
+vikram:{plan:'Pro',since:'Nov 2024',csat:'4.4',ask:'my dashboard is very slow',again:'the dashboard is slow again today',h:[
+['Slow dashboard','Oversized cached filter set','Saved filters reset'],
+['Failed webhook deliveries','Endpoint timeout too short','Timeout raised on the endpoint']]}};
+const CAP=[`Pick a customer, save their past tickets, then ask a question.`,`Recall: searching Hindsight for this customer's past issues.`,`Understand: history found, building context for the answer.`,`Resolve: a personalised answer is ready. Compare it with the answer that has no memory.`,`Verify: waiting for the customer to confirm the fix.`,`Remember: the confirmed fix is now stored in Hindsight.`];
+let S={mems:[],msg:'',reply:''},c1=0,c2=0,c3=0,ts=[],logOn=false,T0=Date.now();
+const cn=()=>$('cust').value.trim().toLowerCase();
+const P=()=>C[cn()]||{plan:'New',since:'today',csat:'-',ask:'I need help with my account',again:'I have the same problem again',h:[]};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const isNew=t=>/Verified support resolution/i.test(t);
+const qn=s=>(s.match(/\?/g)||[]).length;
+const fq=n=>`${n} follow-up question${n===1?'':'s'}`;
+const seedText=(n,h)=>`Customer ${n} contacted support about "${h[0]}". Root cause: ${h[1]}. Resolution: ${h[2]}.`;
+const step=n=>{for(let i=1;i<=5;i++)$('s'+i).classList.toggle('on',i<=n);$('cap').textContent=CAP[n]};
+const live=()=>{$('hs').textContent='Hindsight connected';$('hs').className='pill live'};
+const mark=i=>$('d'+i).classList.add('done');
+let tt;function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>e.classList.remove('on'),3200)}
+function log(t){if(!logOn){$('tl').innerHTML='';logOn=true}const li=document.createElement('li');li.innerHTML=`<b>${new Date().toLocaleTimeString()}</b> ${esc(t)}`;$('tl').prepend(li)}
+setInterval(()=>{const s=Math.floor((Date.now()-T0)/1000);$('clk').textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')},1000);
+const cards=ms=>ms.map((m,i)=>`<article class="card${isNew(m.text)?' v':''}" style="animation-delay:${i*.08}s"><span class="tab">${isNew(m.text)?'Learned from a verified fix':'Recalled from history'}</span>${esc(m.text)}</article>`).join('');
+function draw(ms,extra){
+ const cx=170,cy=110,it=ms.slice(0,10).map(m=>({t:m.text,n:isNew(m.text)}));if(extra)it.push({t:extra,n:true});let l='',d='';
+ it.forEach((m,i)=>{const a=-Math.PI/2+i*2*Math.PI/it.length,x=cx+132*Math.cos(a),y=cy+80*Math.sin(a);
+  l+=`<line class="ln" x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" style="animation-delay:${i*.1}s"/>`;
+  d+=`<circle class="nd${m.n?' n':''}" cx="${x}" cy="${y}" r="8"><title>${esc(m.t)}</title></circle>`});
+ $('map').innerHTML=l+d+`<circle cx="${cx}" cy="${cy}" r="22" fill="#eadfc4"/><text x="${cx}" y="${cy+7}" text-anchor="middle" font-size="20" font-weight="700" font-family="Georgia,serif" fill="#2a2316">${(cn()||'?')[0].toUpperCase()}</text>`}
+function who(){const n=cn()||'?',p=P();
+ $('nm').textContent=n;$('av').textContent=n[0];$('pl').textContent=p.plan;
+ $('meta').innerHTML=p.h.length?`<span>Customer since ${p.since}</span><span>Satisfaction ${p.csat} out of 5</span><span>${p.h.length} past tickets</span>`:`<span>New customer with no history yet</span>`;
+ $('hi').innerHTML=p.h.map(x=>`<li><b>${esc(x[0])}</b><small>Cause: ${esc(x[1])}</small><small>Fix: ${esc(x[2])}</small></li>`).join('');
+ document.querySelectorAll('.cl').forEach(e=>e.classList.toggle('on',e.dataset.n===n));
+ [1,2,3].forEach(i=>$('d'+i).classList.remove('done'));
+ S.mems=[];$('out').innerHTML='';$('retained').innerHTML='';
+ $('mems').innerHTML='<p class="empty">Nothing recalled yet. Ask a question and the customer\'s file fills in here.</p>';draw([]);step(0)}
+function pick(n){$('cust').value=n;$('msg').value='';who()}
+$('cl').innerHTML=Object.keys(C).map(n=>`<div class="cl" data-n="${n}" onclick="pick('${n}')"><div class="av">${n[0]}</div><div><b>${n}</b><small>${C[n].plan} plan</small></div></div>`).join('');
+async function api(p,b){const r=await fetch(p,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});const d=await r.json();if(!r.ok)throw new Error(d.error||'Server error');return d}
+async function newSession(){
+ try{await api('/api/new-session',{});c1=c2=c3=0;ts=[];['n1','n2','n3'].forEach(i=>$(i).textContent='0');$('n4').textContent='-';
+  $('tl').innerHTML='<li>No events yet.</li>';logOn=false;T0=Date.now();who();toast('Clean session started. Memory is empty again.')}
+ catch(e){toast('Could not start a new session: '+e.message)}}
+async function seed(){const p=P();if(!p.h.length){toast('A new customer has no past tickets to save');return}
+ const b=$('d1');b.disabled=true;
+ try{await api('/api/seed',{customer:cn(),tickets:p.h.map(h=>seedText(cn(),h))});live();mark(1);toast('History saved to Hindsight. Wait 15 seconds, then ask.');log(`Saved ${p.h.length} past tickets to Hindsight`)}
+ catch(e){toast('Saving failed: '+e.message)}
+ b.disabled=false}
+function ask(k){mark(k);$('msg').value=k===2?P().ask:P().again;send()}
+async function send(){
+ const msg=$('msg').value.trim();if(!msg)return;const b=$('sendBtn');b.disabled=true;b.textContent='Recalling';
+ $('retained').innerHTML='';$('out').innerHTML=`<div class="you">${esc(msg)}</div><div class="warn" style="background:#18223d;color:var(--text)">Searching Hindsight for this customer's history.</div>`;
+ step(1);log(`Customer asked: ${msg}`);const t0=performance.now();
+ try{
+  const d=await api('/api/chat',{customer:cn(),message:msg});live();
+  const el=performance.now()-t0;ts.push(el);$('n4').textContent=(ts.reduce((a,b)=>a+b,0)/ts.length/1000).toFixed(1)+'s';
+  S={mems:d.memories,msg:msg,reply:d.reply_memory};
+  const ln=d.memories.filter(m=>isNew(m.text)).length;c1+=d.memories.length;c3+=ln;$('n1').textContent=c1;$('n3').textContent=c3;
+  $('mems').innerHTML=d.memories.length?cards(d.memories):'<p class="empty">No history found for this customer.</p>';
+  draw(d.memories);step(2);log(`Recalled ${d.memories.length} memories`+(ln?`, ${ln} learned from earlier verified fixes`:''));
+  step(3);const id=Math.floor(1000+Math.random()*9000);
+  const chips=d.memories.slice(0,4).map(m=>`<span class="ch" title="${esc(m.text)}">${esc(m.text.slice(0,44))}...</span>`).join('');
+  $('out').innerHTML=`<div class="you">${esc(msg)}</div><div class="tk">Ticket #RQ-${id} for ${esc(cn())}, answered in ${(el/1000).toFixed(1)}s</div>
+   <div class="ans"><div class="a"><h4>Without memory</h4>${esc(d.reply_plain)}<div class="q">Asks ${fq(qn(d.reply_plain))}</div></div>
+   <div class="a mem"><h4>With RecallIQ memory</h4>${esc(d.reply_memory)}<div class="q">Asks ${fq(qn(d.reply_memory))}</div><div class="used">History given to this answer: ${chips||'none'}</div></div></div>
+   ${ln?'<div class="ok">This answer used a fix learned earlier in this session.</div>':''}
+   ${d.memories.length?'':'<div class="warn">No history found for this customer. This answer is generic, so pass it to a human agent if it does not solve the issue.</div>'}
+   <div class="bar" id="ask"><span>Did this fix the problem?</span><button onclick="resolve(true)">It worked</button><button class="no" onclick="resolve(false)">Not fixed</button></div>`;
+  step(4);log('Personalised answer ready, waiting for the customer to confirm');
+ }catch(e){$('out').innerHTML=`<div class="warn">Something went wrong: ${esc(e.message)}. Check that the app window is still running, then send again.</div>`;step(0)}
+ b.disabled=false;b.textContent='Send'}
+async function resolve(w){
+ try{const d=await api('/api/resolve',{customer:cn(),worked:w,message:S.msg,reply:S.reply});
+  if(d.retained){step(5);c2++;$('n2').textContent=c2;draw(S.mems,d.text);
+   $('ask').outerHTML='<div class="ok">Resolution verified. Memory retained in Hindsight.</div>';
+   $('retained').innerHTML=`<article class="card v"><span class="tab">Stored in Hindsight</span>${esc(d.text)}</article>`;
+   toast('Memory retained in Hindsight');log('Customer confirmed the fix, outcome stored in Hindsight')}
+  else{$('ask').outerHTML='<div class="warn">Not verified, so nothing was stored. Pass this ticket to a human agent.</div>';log('Fix not confirmed, nothing stored')}
+ }catch(e){$('ask').outerHTML=`<div class="warn">Something went wrong: ${esc(e.message)}.</div>`}}
+who();
+</script></body></html>

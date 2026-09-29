@@ -65,7 +65,7 @@ Put your Hindsight and Groq keys in `.env`, then start the app:
 py app.py
 ```
 
-Open http://127.0.0.1:5077
+Open https://recalliq-09tk.onrender.com
 
 ## Honest limits
 
@@ -73,6 +73,4 @@ Open http://127.0.0.1:5077
 - If a customer has no history, RecallIQ says so and the ticket goes to a human agent.
 - Hindsight needs about 15 to 30 seconds to process newly stored memories.
 
-## Team
 
-Add team name and members here.
